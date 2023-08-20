@@ -1,0 +1,2 @@
+module Publoc::UsersHelper
+end
