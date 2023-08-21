@@ -16,6 +16,18 @@ class Public::UsersController < ApplicationController
     end
   end
 
+  def
+    confirm_delete
+  end
+
+  def unsubscribe
+    @user = current_user
+    @user.update(is_deleted: true)
+    reset_session
+    flash[:notice] = "退会処理を実行しました"
+    redirect_to root_path
+  end
+
   private
 
   def user_params

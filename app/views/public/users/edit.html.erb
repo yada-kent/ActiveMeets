@@ -13,7 +13,8 @@
     <%= form.label :introduction %>
     <%= form.text_field :introduction %>
   </div>
-  <div>
-    <%= form.submit "更新" %>
+  <div class="form-group">
+    <%= form.submit '編集内容を保存', class: "btn btn-success" %>
+    <%= link_to "退会する", users_confirm_delete_path, method: :get, class: "btn btn-danger ms-3" %>
   </div>
 <% end %>
