@@ -1,0 +1,9 @@
+<h1>投稿一覧</h1>
+<%= link_to '新しい投稿', new_post_path %>
+<ul>
+  <% @posts.each do |post| %>
+    <li>
+      <%= link_to post.title, post_path(post) %> by <%= post.user.name %>
+    </li>
+  <% end %>
+</ul>

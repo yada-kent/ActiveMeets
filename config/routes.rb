@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   namespace :admin do
     resources :users, only: [:index, :show, :edit]
   end
@@ -19,10 +18,13 @@ Rails.application.routes.draw do
     resource :users, only: [:show, :edit, :update]
     get 'users/confirm_delete', to: 'users#confirm_delete'
     patch 'users/unsubscribe', to: 'users#unsubscribe'
-    
   end
-  
-  
+
+  scope module: :public do
+    resources :posts, only: [:show, :edit, :update, :destroy, :new, :index, :create]
+  end
+
+
   devise_for :users, skip: [:passwords], controllers: {
     registrations: 'public/registrations',
     sessions: 'public/sessions'

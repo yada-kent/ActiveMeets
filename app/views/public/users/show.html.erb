@@ -3,4 +3,7 @@
 <p>名前: <%= current_user.name %></p>
 <p>メールアドレス: <%= current_user.email %></p>
 <p>プロフィール: <%= current_user.introduction %></p>
+<li class="nav-item">
+  <%= link_to "プロフィール編集", edit_users_path, class: "nav-link" %>
+</li>
 ですよね
