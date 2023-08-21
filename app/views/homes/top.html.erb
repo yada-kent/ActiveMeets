@@ -8,6 +8,7 @@
 <% if user_signed_in? %>
   <p>名前: <%= current_user.name %></p>
   <p>メールアドレス: <%= current_user.email %></p>
+  <p>プロフィール: <%= current_user.introduction %></p>
 <% elsif admin_signed_in? %>
   <p>管理者としてログインしてます</p>
 <% else %>

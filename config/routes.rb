@@ -13,16 +13,16 @@ Rails.application.routes.draw do
     sessions: 'admin/sessions'
   }
 
-  # 管理者側のルーティング
+  # 管理者側のルーティング、namespaceを使うことで、コントローラーがuserとかぶらないようにする
 
   scope module: :public do
     resource :users, only: [:show, :edit, :update]
     get 'users/confirm_delete', to: 'users#confirm_delete'
     patch 'users/unsubscribe', to: 'users#unsubscribe'
+    
   end
-
-
-
+  
+  
   devise_for :users, skip: [:passwords], controllers: {
     registrations: 'public/registrations',
     sessions: 'public/sessions'
