@@ -18,6 +18,9 @@
           <li class="nav-item">
             <%= link_to "トップ", root_path, class: "nav-link" %>
           </li>
+          <li class="nav-item">
+            <%= link_to "投稿一覧",  posts_path, class: "nav-link" %>
+          </li>
         <% if user_signed_in? %>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">

@@ -13,11 +13,11 @@ Rails.application.routes.draw do
   }
 
   # 管理者側のルーティング、namespaceを使うことで、コントローラーがuserとかぶらないようにする
-
+  
   scope module: :public do
     resource :users, only: [:show, :edit, :update]
     get 'users/confirm_delete', to: 'users#confirm_delete'
-    patch 'users/unsubscribe', to: 'users#unsubscribe'
+    patch 'users/unsubscribe', to: 'users#unsubscribe' 
   end
 
   scope module: :public do

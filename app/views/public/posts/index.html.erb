@@ -5,5 +5,7 @@
     <li>
       <%= link_to post.title, post_path(post) %> by <%= post.user.name %>
     </li>
+    <%= image_tag(resize_image(post.image, width: 300, height: 300)) if post.image.attached? %>
+
   <% end %>
 </ul>
