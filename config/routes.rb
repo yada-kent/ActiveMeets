@@ -13,16 +13,23 @@ Rails.application.routes.draw do
   }
 
   # 管理者側のルーティング、namespaceを使うことで、コントローラーがuserとかぶらないようにする
-  
+
   scope module: :public do
     resource :users, only: [:show, :edit, :update]
     get 'users/confirm_delete', to: 'users#confirm_delete'
-    patch 'users/unsubscribe', to: 'users#unsubscribe' 
+    patch 'users/unsubscribe', to: 'users#unsubscribe'
   end
 
   scope module: :public do
     resources :posts, only: [:show, :edit, :update, :destroy, :new, :index, :create]
   end
+
+  scope module: :public do
+    resources :posts do
+      resources :comments, only: [:create]
+    end
+  end
+
 
 
   devise_for :users, skip: [:passwords], controllers: {

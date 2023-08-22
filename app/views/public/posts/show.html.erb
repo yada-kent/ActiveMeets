@@ -2,6 +2,25 @@
 <p>投稿者: <%= @post.user.name %></p>
 <p><%= @post.body %></p>
 <%= image_tag(resize_image(@post.image, width: 300, height: 300)) if @post.image.attached? %>
+
+<h2>コメント</h2>
+<%= form_with(model: [@post, Comment.new], local: true) do |form| %>
+  <div>
+    <%= form.label :content, "コメント" %>
+    <%= form.text_area :content %>
+  </div>
+  <%= form.submit "コメントする" %>
+<% end %>
+
+<ul>
+  <% @post.comments.each do |comment| %>
+    <li>
+      <strong><%= comment.user&.name || "匿名" %>:</strong>
+      <%= comment.content %>
+    </li>
+  <% end %>
+</ul>
+
 <%= link_to '編集', edit_post_path(@post) %> |
 <%= link_to '削除', post_path(@post), method: :delete, data: { confirm: '削除しますか？' } %> |
 <%= link_to '一覧へ戻る', posts_path %>
