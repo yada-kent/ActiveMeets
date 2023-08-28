@@ -37,6 +37,12 @@ class Public::PostsController < ApplicationController
     redirect_to posts_url, notice: '投稿が削除されました。'
   end
 
+  def search
+    @posts = Post.where("body LIKE ?", "%#{params[:keyword]}%")
+    render :index
+  end
+
+
   private
 
   def set_post

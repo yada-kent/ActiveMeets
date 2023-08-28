@@ -28,6 +28,13 @@ class Public::UsersController < ApplicationController
     redirect_to root_path
   end
 
+  def likes
+    @user = current_user
+    @liked_posts = @user.liked_posts
+  end
+
+
+
   private
 
   def user_params

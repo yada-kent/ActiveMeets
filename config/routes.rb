@@ -2,35 +2,28 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users, only: [:index, :show, :edit]
-  end
-
-  namespace :admin do
     get '/' => 'homes#top'
   end
 
-   devise_for :admin, skip: [:registraions, :passwords], controllers: {
+  devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: 'admin/sessions'
   }
 
-  # 管理者側のルーティング、namespaceを使うことで、コントローラーがuserとかぶらないようにする
-
   scope module: :public do
-    resource :users, only: [:show, :edit, :update]
-    get 'users/confirm_delete', to: 'users#confirm_delete'
-    patch 'users/unsubscribe', to: 'users#unsubscribe'
-  end
-
-  scope module: :public do
-    resources :posts, only: [:show, :edit, :update, :destroy, :new, :index, :create]
-  end
-
-  scope module: :public do
-    resources :posts do
-      resources :comments, only: [:create]
+    resource :users, only: [:show, :edit, :update] do
+      get 'confirm_delete'
+      patch 'unsubscribe'
+      get 'likes', on: :collection
+      resource :follow, only: [:create, :destroy], module: :users
     end
+
+    resources :posts, only: [:show, :edit, :update, :destroy, :new, :index, :create] do
+      get 'search', on: :collection
+      resources :comments, only: [:create]
+      resources :likes, only: [:create, :destroy]
+    end
+
   end
-
-
 
   devise_for :users, skip: [:passwords], controllers: {
     registrations: 'public/registrations',
@@ -42,9 +35,6 @@ Rails.application.routes.draw do
   end
 
   root to: 'homes#top'
-
-
-
-
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
+
+#
