@@ -22,7 +22,8 @@ class Public::UsersController < ApplicationController
 
   def unsubscribe
     @user = current_user
-    @user.update(is_deleted: true, name: "退会済みユーザー")
+    @user.update(is_deleted: true, original_name: current_user.name, name: "退会済みユーザー")
+    #退会する際、元の名前をoriginal_nameカラムに保存する
     reset_session
     flash[:notice] = "退会処理を実行しました"
     redirect_to root_path
