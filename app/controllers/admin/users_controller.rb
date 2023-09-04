@@ -13,6 +13,15 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      redirect_to admin_user_path(@user), notice: 'ユーザー情報が更新されました'
+    else
+      render :edit
+    end
+  end
+
   def unsubscribe
     @user = User.find(params[:id])  # ここを変更
     @user.update(is_deleted: true, original_name: @user.name, name: "退会済みユーザー")
@@ -26,6 +35,12 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.update(is_deleted: false, name: @user.original_name, original_name: nil)
     redirect_to admin_user_path(@user), notice: "ユーザーの退会処理を取り消しました"
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:name, :email, :introduction, :is_deleted) # ここに許可したいパラメータを追加
   end
 
 

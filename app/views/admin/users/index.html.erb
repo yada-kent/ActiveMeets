@@ -5,13 +5,15 @@
     <tr>
       <th>名前</th>
       <th>メールアドレス</th>
+      <th>アカウントステータス</th> <!-- ヘッダに新しいカラムを追加 -->
     </tr>
   </thead>
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= link_to user.name, admin_user_path(user) %></td> <!-- この行を変更 -->
+        <td><%= link_to user.name, admin_user_path(user) %></td>
         <td><%= user.email %></td>
+        <td><%= user.is_deleted ? '退会済み' : '有効' %></td> <!-- アカウントのステータスを表示 -->
       </tr>
     <% end %>
   </tbody>
