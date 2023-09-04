@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       patch :rejoin
     end
   end
+  resources :posts, only: [:destroy]
 end
 
   devise_for :admin, skip: [:registrations, :passwords], controllers: {

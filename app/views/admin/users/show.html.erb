@@ -16,3 +16,14 @@
   <% end %>
 </div>
 
+<h2>投稿一覧</h2>
+<ul>
+  <% @posts.each do |post| %>
+    <li>
+      <h3><%= post.title %></h3> <!-- 例: 投稿のタイトル -->
+      <p><%= post.body %></p> <!-- 例: 投稿の本文 -->
+      <!-- 他の投稿の詳細情報もここに表示 -->
+      <%= link_to '削除', admin_post_path(post), method: :delete, data: { confirm: '本当にこの投稿を削除しますか？' }, class: 'btn btn-danger' %>
+    </li>
+  <% end %>
+</ul>
