@@ -3,7 +3,13 @@
 <ul>
   <% @liked_posts.each do |post| %>
     <li>
-      <%= link_to post.title, post_path(post) %>
+      <strong>タイトル:</strong> <%= link_to post.title, post_path(post) %>
+      <p><strong>内容:</strong> <%= post.body %></p> <!-- 例: 投稿の本文を表示 -->
+      <% if post.image.attached? %>
+        <%= image_tag(resize_image(post.image, width: 300, height: 300)) %> <!-- 投稿に画像が添付されていれば、サイズを調整して表示 -->
+      <% end %>
+      <p><strong>投稿者:</strong> <%= post.user.name %></p>
+      <!-- 他に表示したい投稿の詳細情報があればここに追加 -->
     </li>
   <% end %>
 </ul>

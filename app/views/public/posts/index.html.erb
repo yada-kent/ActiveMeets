@@ -2,13 +2,15 @@
 <%= link_to '新しい投稿', new_post_path, class: "btn btn-primary mb-3" %>
 
 <div class="list-group">
-  <% @posts.order(created_at: :desc).each do |post| %>
+  <% posts_to_display = @posts.is_a?(Array) ? @posts : @posts.order(created_at: :desc) %>
+  <% posts_to_display.each do |post| %>
     <div class="list-group-item">
       <strong><%= link_to post.title, post_path(post) %></strong>
       by <%= link_to post.user.name, user_profile_path(post.user) %>
       <div class="mt-2">
         <%= image_tag(resize_image(post.image, width: 300, height: 300)) if post.image.attached? %>
       </div>
+      <!-- ... -->
     </div>
   <% end %>
 </div>

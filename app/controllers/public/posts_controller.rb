@@ -40,9 +40,31 @@ class Public::PostsController < ApplicationController
   end
 
   def search
-    @posts = Post.where("body LIKE ?", "%#{params[:keyword]}%")
-    render :index
+  # 検索文字列が存在する場合のみ検索を実行する
+  if params[:query].present?
+    if params[:query_type] == "posts"
+      @posts = Post.where("body LIKE ?", "%#{params[:query]}%")
+    else
+      @users = User.where("name LIKE ?", "%#{params[:query]}%")
+      render "public/users/index" and return
+    end
+  else
+    # 検索文字列が存在しない場合は、空の配列をセットする
+    if params[:query_type] == "posts"
+      @posts = []
+    else
+      @users = []
+      render "public/users/index" and return
+    end
   end
+    @posts ||= []
+    render "public/posts/index"
+  end
+
+
+
+
+
 
 
   private

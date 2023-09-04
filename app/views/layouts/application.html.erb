@@ -25,11 +25,13 @@
             <%= link_to "投稿一覧",  posts_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= form_with(url: search_posts_path, method: :get, local: true) do |form| %>
-              <%= form.text_field :keyword, placeholder: "キーワードで検索" %>
-              <%= form.submit "検索" %>
-            <% end %>
+          <%= form_with(url: search_posts_path, method: :get, local: true) do |form| %>
+            <%= form.select :query_type, options_for_select([['投稿', 'posts'], ['ユーザー', 'users']], selected: params[:query_type]) %>
+            <%= form.text_field :query, placeholder: "検索キーワード" %>
+            <%= form.submit "検索" %>
+          <% end %>
           </li>
+
         <% if user_signed_in? %>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
