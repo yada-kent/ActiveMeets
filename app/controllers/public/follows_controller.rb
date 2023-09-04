@@ -1,14 +1,23 @@
 class Public::FollowsController < ApplicationController
   before_action :set_user
 
+  def set_user
+    @user = User.find(params[:folloed_id])
+  end
+
   def create
-    current_user.followings << @user
-    redirect_to @user, notice: 'ユーザーをフォローしました'
+    follow = current_user.active_follows.new(followee_id: @user.id)
+    if follow.save
+    redirect_to users_path, notice: 'ユーザーをフォローしました'
+    else
+      このユーザーをフォローできません
+    end
   end
 
   def destroy
-    current_user.followings.destroy(@user)
-    redirect_to @user, notice: 'ユーザーのフォローを解除しました'
+    follow = current_user.active_follows.find_by(followee_id: @user.id)
+    follow.destroy if follow
+    redirect_to users_path, notice: 'ユーザーのフォローを解除しました'
   end
 
   private

@@ -1,0 +1,19 @@
+<div class="my-page-container">
+  <h1><%= @user.name %> のプロフィール</h1>
+  <div class="user-info">
+    <p><strong>名前:</strong> <%= @user.name %></p>
+    <p><strong>プロフィール:</strong> <%= @user.introduction %></p>
+  </div>
+
+  <div class="follow-stats">
+    <p><%= @user.followees.count %> フォロー中</p>
+    <p><%= @user.followers.count %> フォロワー</p>
+  </div>
+
+  <% if current_user == @user %>
+    <div class="user-actions">
+      <%= link_to "プロフィール編集", edit_users_path, class: "btn btn-secondary" %>
+      <%= link_to "いいね一覧", likes_users_path, class: "btn btn-info" %>
+    </div>
+  <% end %>
+</div>

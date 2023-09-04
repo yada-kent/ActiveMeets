@@ -1,0 +1,4 @@
+ja:
+  devise:
+    failure:
+      deleted_account: "アカウントは退会済みです。"

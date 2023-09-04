@@ -1,21 +1,28 @@
-<h1>マイページ</h1>
-貴方は
-<p>名前: <%= current_user.name %></p>
-<p>メールアドレス: <%= current_user.email %></p>
-<p>プロフィール: <%= current_user.introduction %></p>
+<div class="my-page-container">
+  <h1>マイページ</h1>
+  <div class="user-info">
+    <p><strong>名前:</strong> <%= current_user.name %></p>
+    <p><strong>メールアドレス:</strong> <%= current_user.email %></p>
+    <p><strong>プロフィール:</strong> <%= current_user.introduction %></p>
+  </div>
 
-<% if current_user != @user && !current_user.followings.include?(@user) %>
-  <%= link_to 'フォロー', follows_path(user_id: @user.id), method: :post %>
-<% else %>
-  <%= link_to 'フォロー解除', follow_path(@user), method: :delete %>
-<% end %>
+  <% unless current_user == @user %>
+    <div class="follow-actions">
+      <% if !current_user.followings.include?(@user) %>
+        <%= link_to 'フォロー', follows_path(user_id: @user.id), method: :post, class: "btn btn-primary" %>
+      <% else %>
+        <%= link_to 'フォロー解除', users_follow_path(@user), method: :delete, class: "btn btn-danger" %>
+      <% end %>
+    </div>
+  <% end %>
 
-<p><%= @user.followings.count %> フォロー中</p>
-<p><%= @user.followers.count %> フォロワー</p>
+  <div class="follow-stats">
+    <p><%= @user.followees.count %> フォロー中</p>
+    <p><%= @user.followers.count %> フォロワー</p>
+  </div>
 
-<li class="nav-item">
-  <%= link_to "プロフィール編集", edit_users_path, class: "nav-link" %>
-</li>
-<%= link_to "いいね一覧", likes_users_path %>
-
-ですよね
+  <div class="user-actions">
+    <%= link_to "プロフィール編集", edit_users_path, class: "btn btn-secondary" %>
+    <%= link_to "いいね一覧", likes_users_path, class: "btn btn-info" %>
+  </div>
+</div>

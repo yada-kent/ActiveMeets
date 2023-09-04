@@ -1,2 +1,18 @@
-<h1>Admin::Users#show</h1>
-<p>Find me in app/views/admin/users/show.html.erb</p>
+<h1>ユーザー詳細</h1>
+
+<div class="user-details">
+  <p><strong>名前:</strong> <%= @user.name %></p>
+  <p><strong>メールアドレス:</strong> <%= @user.email %></p>
+  <p><strong>プロフィール:</strong> <%= @user.introduction %></p>
+  <p><strong>会員ステータス:</strong> <%= @user.is_deleted ? '退会済み' : '有効' %></p>
+</div>
+
+<div class="user-actions">
+  <%= link_to 'プロフィール編集', edit_admin_user_path(@user), class: "btn btn-secondary" %>
+  <% if @user.is_deleted %>
+  <%= link_to '復帰処理', rejoin_admin_user_path(@user), method: :patch, data: { confirm: '本当にこのユーザーを復帰させますか？' }, class: "btn btn-success" %>
+  <% else %>
+  <%= link_to '退会処理', unsubscribe_admin_user_path(@user), method: :patch, data: { confirm: '本当にこのユーザーを退会させますか？' }, class: "btn btn-danger" %>
+  <% end %>
+</div>
+

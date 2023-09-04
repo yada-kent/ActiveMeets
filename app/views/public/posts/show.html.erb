@@ -3,10 +3,12 @@
 <p><%= @post.body %></p>
 <%= image_tag(resize_image(@post.image, width: 300, height: 300)) if @post.image.attached? %>
 
-<% if current_user != @user && !current_user.followings.include?(@user) %>
-  <%= link_to 'フォロー', user_follow_path(followed_id: @user.id), method: :post %>
-<% else %>
-  <%= link_to 'フォロー解除', user_follow_path, method: :delete %>
+<% if current_user != @user %>
+  <% if current_user != @user && !current_user.followees.include?(@user) %>
+    <%= link_to 'フォロー', users_follow_path(followed_id: @user.id), method: :post %>
+  <% else %>
+    <%= link_to 'フォロー解除', users_follow_path(followed_id: @user.id), method: :delete %>
+  <% end %>
 <% end %>
 
 

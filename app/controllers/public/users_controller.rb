@@ -22,7 +22,7 @@ class Public::UsersController < ApplicationController
 
   def unsubscribe
     @user = current_user
-    @user.update(is_deleted: true)
+    @user.update(is_deleted: true, name: "退会済みユーザー")
     reset_session
     flash[:notice] = "退会処理を実行しました"
     redirect_to root_path
@@ -31,6 +31,10 @@ class Public::UsersController < ApplicationController
   def likes
     @user = current_user
     @liked_posts = @user.liked_posts
+  end
+
+  def profile
+    @user = User.find(params[:id])
   end
 
 
