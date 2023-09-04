@@ -16,10 +16,16 @@
     </div>
   <% end %>
 
-  <div class="follow-stats">
-    <p><%= @user.followees.count %> フォロー中</p>
-    <p><%= @user.followers.count %> フォロワー</p>
-  </div>
+ <div class="follow-stats">
+  <p>
+    <%= link_to "#{@user.followees.count} フォロー中", user_followees_path(@user) %>
+  </p>
+  <p>
+    <%= link_to "#{@user.followers.count} フォロワー", user_followers_path(@user) %>
+  </p>
+</div>
+
+
 
   <div class="user-actions">
     <%= link_to "プロフィール編集", edit_users_path, class: "btn btn-secondary" %>

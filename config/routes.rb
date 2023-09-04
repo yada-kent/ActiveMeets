@@ -24,6 +24,9 @@ end
       resource :follow, only: [:create, :destroy]
     end
 
+    get 'users/:id/followees', to: 'users#followees', as: 'user_followees'
+    get 'users/:id/followers', to: 'users#followers', as: 'user_followers'
+
     resources :posts, only: [:show, :edit, :update, :destroy, :new, :index, :create] do
       get 'search', on: :collection
       resources :comments, only: [:create]
