@@ -1,0 +1,18 @@
+<h1>タグ一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>タグ名</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tags.each do |tag| %>
+      <tr>
+        <td><%= tag.tag %></td>
+        <td><%= link_to '削除', admin_namespace_tag_path(tag), method: :delete, data: { confirm: 'このタグを削除してもよろしいですか？' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -13,9 +13,15 @@ Rails.application.routes.draw do
   resources :posts, only: [:destroy]
 end
 
+namespace :admin_namespace do
+  resources :tags, only: [:index, :destroy]
+end
+
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: 'admin/sessions'
   }
+
+
 
   scope module: :public do
     resource :users, only: [:show, :edit, :update] do

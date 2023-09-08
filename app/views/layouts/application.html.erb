@@ -43,14 +43,18 @@
           </li>
         </ul>
         <% elsif admin_signed_in? %>
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <%= link_to "ユーザー一覧", admin_users_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link" %>
-          </li>
-        </ul>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <%= link_to "ユーザー一覧", admin_users_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item"> <!-- この部分を追加します -->
+              <%= link_to "タグ管理", admin_namespace_tags_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link" %>
+            </li>
+          </ul>
+
         <% else %>
         <ul class="navbar-nav ml-auto">
            <li class="nav-item">
