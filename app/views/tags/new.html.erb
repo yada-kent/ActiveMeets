@@ -1,0 +1,18 @@
+<h1>新しいタグの追加</h1>
+
+<%= form_with(model: @tag, local: true) do |form| %>
+  <div>
+    <%= form.label :tag, 'タグ名' %>
+    <%= form.text_field :tag %>
+  </div>
+  <div>
+    <%= form.submit 'タグを追加' %>
+  </div>
+<% end %>
+
+<h2>登録済みのタグ一覧</h2>
+<ul>
+  <% @tags.each do |tag| %>
+    <li><%= tag.tag %></li>
+  <% end %>
+</ul>

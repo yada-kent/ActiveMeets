@@ -2,7 +2,6 @@
 <p>投稿者: <%= @post.user.name %></p>
 <p><%= @post.body %></p>
 <%= image_tag(resize_image(@post.image, width: 300, height: 300)) if @post.image.attached? %>
-
 <% if current_user && current_user != @post.user %>
   <% if !current_user.followees.include?(@post.user) %>
     <%= link_to 'フォロー', users_follow_path(followed_id: @post.user.id), method: :post %>
@@ -10,6 +9,17 @@
     <%= link_to 'フォロー解除', users_follow_path(followed_id: @post.user.id), method: :delete %>
   <% end %>
 <% end %>
+
+
+<div class="tags">
+  <strong>Tags:</strong>
+  <% @post.tags.each do |tag| %>
+    <span class="tag">
+      <%= link_to tag.tag, tag_path(tag) %>
+    </span>
+  <% end %>
+</div>
+
 
 <h2>コメント</h2>
 

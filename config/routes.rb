@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   get 'public/user_deleted'
+
   namespace :admin do
     root to: "homes#top"
   resources :users, only: [:index, :show, :edit, :update] do
@@ -23,7 +24,7 @@ end
       get 'likes', on: :collection
       resource :follow, only: [:create, :destroy]
     end
-    
+
     get 'users/:id/followees', to: 'users#followees', as: 'user_followees'
     get 'users/:id/followers', to: 'users#followers', as: 'user_followers'
 
@@ -44,6 +45,12 @@ end
 
   devise_scope :user do
     post '/users/guest_sign_in', to: 'users/sessions#new_guest' #ゲストログインした際の処理
+  end
+
+  resources :tags, only: [:new, :create, :index, :show]
+
+  namespace :api do
+    resources :tags, only: [:index]
   end
 
   get 'user_deleted', to: 'public#user_deleted', as: 'user_deleted'
