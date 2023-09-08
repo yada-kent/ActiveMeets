@@ -1,16 +1,12 @@
 class Public::FollowsController < ApplicationController
   before_action :set_user
 
-  def set_user
-    @user = User.find(params[:folloed_id])
-  end
-
   def create
     follow = current_user.active_follows.new(followee_id: @user.id)
     if follow.save
-    redirect_to users_path, notice: 'ユーザーをフォローしました'
+      redirect_to users_path, notice: 'ユーザーをフォローしました'
     else
-      このユーザーをフォローできません
+      redirect_to users_path, alert: 'このユーザーをフォローできません'
     end
   end
 
