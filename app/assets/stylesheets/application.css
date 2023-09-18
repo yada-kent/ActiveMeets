@@ -25,3 +25,11 @@
     color: #34495E; /* 色の変更 */
     line-height: 1.6; /* 行間の調整 */
 }
+
+.post-container {
+    max-width: 600px; /* 適切な最大幅を設定 */
+}
+
+.card {
+    border-radius: 15px; /* カードの角を丸める */
+}

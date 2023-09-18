@@ -1,20 +1,24 @@
-<h1>投稿一覧</h1>
-<%= link_to '新しい投稿', new_post_path, class: "btn btn-primary mb-3" %>
+<h1 class="text-center mb-4">投稿一覧</h1>
+<%= link_to '新しい投稿', new_post_path, class: "btn btn-primary mb-3 mx-auto d-block w-50" %>
 
-<div class="list-group">
-  <% posts_to_display = @posts.is_a?(Array) ? @posts : @posts.order(created_at: :desc) %>
-  <% posts_to_display.each do |post| %>
-    <div class="list-group-item">
-      <strong><%= link_to post.title, post_path(post) %></strong>
-      by <%= link_to post.user.name, user_profile_path(post.user) %>
-      <div class="mt-2">
-        <%= image_tag(resize_image(post.image, width: 300, height: 300)) if post.image.attached? %>
-      </div>
-       <div>
-        <% post.tags.each do |tag| %>
-          <%= link_to tag.tag, tag_path(tag.tag), class: "badge badge-primary" %>
+<div class="d-flex justify-content-center">
+  <div class="post-container"> <!-- 追加 -->
+    <% posts_to_display = @posts.is_a?(Array) ? @posts : @posts.order(created_at: :desc) %>
+    <% posts_to_display.each do |post| %>
+      <div class="card mb-4 shadow"> <!-- shadow を追加 -->
+        <% if post.image.attached? %>
+          <div class="card-img-top">
+            <%= image_tag(resize_image(post.image, width: 300, height: 300)) %>
+          </div>
         <% end %>
+        <div class="card-body">
+          <h5 class="card-title"><%= link_to post.title, post_path(post) %></h5>
+          <p class="card-text">by <%= link_to post.user.name, user_profile_path(post.user) %></p>
+          <% post.tags.each do |tag| %>
+            <%= link_to tag.tag, tag_path(tag.tag), class: "badge badge-primary" %>
+          <% end %>
+        </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
