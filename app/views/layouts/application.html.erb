@@ -9,7 +9,7 @@
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
   </head>
 
   <body>
@@ -76,5 +76,15 @@
          <div class="text-center">ようこそ <%= current_user.name %> </div>
       <% end %>
     <%= yield %>
+
+    <%= yield %>
+
+    <!-- 固定の新しい投稿ボタン -->
+    <div class="fixed-post-button">
+      <%= link_to new_post_path, class: "btn btn-primary btn-lg" do %>
+        <i class="fas fa-pen"></i> <!-- Font Awesomeのアイコンを使用。適宜変更可 -->
+      <% end %>
+    </div>
+
   </body>
 </html>

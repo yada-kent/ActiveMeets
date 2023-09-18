@@ -1,3 +1,6 @@
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
 .centered-content {
     max-width: 1000px;
     margin: 100px auto; /* 上下に100pxの余白を持たせて、自動的に左右中央に配置 */
@@ -32,4 +35,21 @@
 
 .card {
     border-radius: 15px; /* カードの角を丸める */
+}
+
+.fixed-post-button {
+  position: fixed;        /* 位置を固定 */
+  bottom: 20px;           /* 下からの距離 */
+  right: 20px;            /* 右からの距離 */
+  z-index: 999;           /* 他の要素の上に表示 */
+}
+
+.fixed-post-button .btn {
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  background-color: blue;
+  color: white;
 }
