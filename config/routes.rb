@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'tags/index'
   get 'public/user_deleted'
 
   namespace :admin do
@@ -53,9 +54,13 @@ end
     post '/users/guest_sign_in', to: 'users/sessions#new_guest' #ゲストログインした際の処理
   end
 
+  resources :tags, only: [:index]
+
   get 'tags/:tag', to: 'public/posts#tagged', as: :tag
 
   get 'user_deleted', to: 'public#user_deleted', as: 'user_deleted'
+
+
 
   root to: 'homes#top'
 end

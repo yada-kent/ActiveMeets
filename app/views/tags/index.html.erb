@@ -1,7 +1,14 @@
-<h1>Tags List</h1>
+<h1>タグ一覧</h1>
 
-<ul>
-  <% @tags.each do |tag| %>
-    <li><%= tag.tag %></li>
-  <% end %>
-</ul>
+<% @tags.each do |tag| %>
+  <div>
+    <%= link_to tag.tag, tag_path(tag.tag) %>
+  </div>
+<% end %>
+
+<h2>タグの追加</h2>
+<%= form_with(url: tags_path, method: :post, local: true) do |f| %>
+  <%= f.label :tag, "タグ名" %>
+  <%= f.text_field :tag %>
+  <%= f.submit "タグを追加" %>
+<% end %>
