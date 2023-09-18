@@ -17,6 +17,7 @@ class Public::PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
+      # タグの保存処理
       redirect_to @post, notice: '投稿が作成されました。'
     else
       render :new
@@ -71,5 +72,6 @@ class Public::PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:title, :body, :image, tag_ids: [])
   end
+
 
 end

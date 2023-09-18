@@ -10,6 +10,11 @@
       <div class="mt-2">
         <%= image_tag(resize_image(post.image, width: 300, height: 300)) if post.image.attached? %>
       </div>
+       <div>
+        <% post.tags.each do |tag| %>
+          <span class="badge badge-primary"><%= tag.tag %></span>
+        <% end %>
+      </div>
       <!-- ... -->
     </div>
   <% end %>

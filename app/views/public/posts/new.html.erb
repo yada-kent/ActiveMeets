@@ -12,15 +12,19 @@
     <%= form.label :image %>
     <%= form.file_field :image %>
   </div>
-  <div id="tags-container">
-    <!-- デフォルトのタグプルダウンはここにはありません -->
-  </div>
-
-  <button type="button" id="add-tag-button">タグを追加</button>
-
-  <%= link_to '新しいタグを作成', new_tag_path %>
 
   <div>
+    <div class='form-group'>
+        <%= form.collection_check_boxes(:tag_ids, Tag.all, :id, :tag) do |tag| %>
+            <div class='form-check'>
+                <%= tag.label class: 'form-check-label' do %>
+                    <%= tag.check_box class: 'form-check-input' %>
+                    <%= tag.text %>
+                <% end %>
+            </div>
+        <% end %>
+    </div>
+  </div>
     <%= form.submit '投稿' %>
   </div>
 <% end %>

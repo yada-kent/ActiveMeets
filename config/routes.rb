@@ -53,12 +53,6 @@ end
     post '/users/guest_sign_in', to: 'users/sessions#new_guest' #ゲストログインした際の処理
   end
 
-  resources :tags, only: [:new, :create, :index, :show]
-
-  namespace :api do
-    resources :tags, only: [:index]
-  end
-
   get 'user_deleted', to: 'public#user_deleted', as: 'user_deleted'
 
   root to: 'homes#top'

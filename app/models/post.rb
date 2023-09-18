@@ -7,12 +7,4 @@ class Post < ApplicationRecord
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
 
-  attr_accessor :tag_ids
-
-  def assign_tags
-    if @tag_ids
-      self.tags = Tag.where(id: @tag_ids)
-    end
-  end
-
 end
