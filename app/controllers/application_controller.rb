@@ -6,4 +6,10 @@ class ApplicationController < ActionController::Base
       super
     end
   end
+
+  protected
+
+  def after_sign_in_path_for(resource)
+    posts_path  # 投稿一覧画面へのパス
+  end
 end
