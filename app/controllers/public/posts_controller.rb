@@ -62,6 +62,10 @@ class Public::PostsController < ApplicationController
     render "public/posts/index"
   end
 
+  def tagged
+    @tag = Tag.find_by(tag: params[:tag])
+    @posts = @tag.posts if @tag
+  end
 
   private
 

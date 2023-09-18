@@ -12,10 +12,9 @@
       </div>
        <div>
         <% post.tags.each do |tag| %>
-          <span class="badge badge-primary"><%= tag.tag %></span>
+          <%= link_to tag.tag, tag_path(tag.tag), class: "badge badge-primary" %>
         <% end %>
       </div>
-      <!-- ... -->
     </div>
   <% end %>
 </div>

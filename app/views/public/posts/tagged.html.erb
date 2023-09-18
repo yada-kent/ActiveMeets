@@ -1,0 +1,16 @@
+<h1><%= @tag.tag %>の投稿一覧</h1>
+
+<% @posts.each do |post| %>
+  <div class="list-group-item">
+      <strong><%= link_to post.title, post_path(post) %></strong>
+      by <%= link_to post.user.name, user_profile_path(post.user) %>
+      <div class="mt-2">
+        <%= image_tag(resize_image(post.image, width: 300, height: 300)) if post.image.attached? %>
+      </div>
+      <div>
+        <% post.tags.each do |tag| %>
+          <span class="badge badge-primary"><%= tag.tag %></span>
+        <% end %>
+      </div>
+  </div>
+<% end %>
