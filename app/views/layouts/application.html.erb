@@ -8,7 +8,7 @@
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'tag_selection' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
   </head>
 
@@ -48,7 +48,7 @@
             <li class="nav-item">
               <%= link_to "ユーザー一覧", admin_users_path, class: "nav-link" %>
             </li>
-            <li class="nav-item"> <!-- この部分を追加します -->
+            <li class="nav-item">
               <%= link_to "タグ管理", admin_namespace_tags_path, class: "nav-link" %>
             </li>
             <li class="nav-item">

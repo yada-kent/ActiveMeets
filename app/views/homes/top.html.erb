@@ -1,16 +1,18 @@
 <% if notice %>
   <p class="notice"><%= notice %></p>
 <% end %>
-<h1>Homes#top</h1>
 
-<p>ホーム画面です</p>
-
-<% if user_signed_in? %>
-  <p>名前: <%= current_user.name %></p>
-  <p>メールアドレス: <%= current_user.email %></p>
-  <p>プロフィール: <%= current_user.introduction %></p>
-<% elsif admin_signed_in? %>
+<% if admin_signed_in? %>
   <p>管理者としてログインしてます</p>
-<% else %>
-  <p>ログインしていません。</p>
 <% end %>
+
+<div class="centered-content">
+    <%= image_tag 'logo.png', alt: 'サイトのロゴ', class: 'logo-size' %>
+    <h2 class="site-intro-title">Active Meets</h2>
+    <p class="site-intro-description">
+      フィットネスとトレーニングの愛好家が集まるサイトです。<br>
+      ここでトレーニングの成果を共有したり、他のメンバーと励まし合ったりできます。<br>
+      トレーニングの記録や成果を共有することで、トレーニングがもっと楽しくなります。<br>
+      Active Meetsで新しい友だちを見つけて、自分のフィットネスの旅を最高のものにしましょう！
+    </p>
+</div>
