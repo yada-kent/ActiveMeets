@@ -1,4 +1,7 @@
 class Public::UsersController < ApplicationController
+  before_action :authenticate_user!, only: [:profile]
+  #ユーザープロフィールの閲覧はログインしているときのみ可能
+
   def show
     @user = current_user
   end

@@ -13,6 +13,7 @@
         <div class="card-body">
           <h5 class="card-title"><%= link_to post.title, post_path(post) %></h5>
           <p class="card-text">by <%= link_to post.user.name, user_profile_path(post.user) %></p>
+          <p><%= post.body.truncate(100) %></p>  <!-- 最初の100字まで本文の内容を表示 -->
           <% post.tags.each do |tag| %>
             <%= link_to tag.tag, tag_path(tag.tag), class: "badge badge-primary" %>
           <% end %>

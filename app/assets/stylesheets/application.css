@@ -35,7 +35,20 @@
 
 .card {
     border-radius: 15px; /* カードの角を丸める */
+    transition: transform 0.3s;
 }
+
+.card:hover {
+  transform: scale(1.05); /* カードにホバーエフェクトを追加 */
+}
+
+.card-img-top img {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px; /* カードの境界線を追加 */
+}
+
+
+
 
 .fixed-post-button {
   position: fixed;        /* 位置を固定 */
@@ -54,3 +67,88 @@
   color: white;
 }
 
+.post-container {
+  background: linear-gradient(45deg, #f3ec78, #af4261);
+}
+
+h1.text-center {
+  font-size: 2.5rem;
+  color: #333;
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+/* 燃えるような背景色 */
+body {
+    background-color: #ffebd3; /* 淡いオレンジ色 */
+}
+
+/* 熱い赤いヘッダー */
+.navbar.bg-primary {
+    background-color: #ff5733 !important; /* 明るい赤色 */
+}
+
+.navbar-dark .navbar-brand,
+.navbar-dark .navbar-nav .nav-link {
+    color: #fff; /* テキストを白に */
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: #f0f0f0; /* ホバー時のテキストカラー */
+    background-color: #e04422; /* ホバー時の背景色 */
+}
+
+/* 検索ボタン */
+input[type="submit"] {
+    background-color: #ff3300;
+    color: #fff;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #e02900;
+}
+
+/* ボタンの強調色 */
+.btn-primary {
+    background-color: #ff3300; /* 濃いオレンジ色 */
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #e02900; /* クリック時の色の変化 */
+}
+
+/* ユーザーグリーティング */
+.text-center {
+    color: #ff5733; /* 明るい赤色 */
+    margin-top: 20px;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+/* 注意事項 */
+.notice {
+    background-color: #ffad9b; /* 淡い赤色 */
+    color: #fff; /* テキストを白に */
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.fixed-post-button .btn-primary.btn-lg {
+    background-color: #ff3300;
+    border: none;
+    border-radius: 50%; /* 円形に */
+    width: 60px; /* 幅の調整 */
+    height: 60px; /* 高さの調整 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

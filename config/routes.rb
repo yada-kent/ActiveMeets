@@ -54,7 +54,7 @@ end
     post '/users/guest_sign_in', to: 'users/sessions#new_guest' #ゲストログインした際の処理
   end
 
-  resources :tags, only: [:index]
+  resources :tags, only: [:index, :create]
 
   get 'tags/:tag', to: 'public/posts#tagged', as: :tag
 
