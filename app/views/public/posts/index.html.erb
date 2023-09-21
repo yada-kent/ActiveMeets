@@ -1,6 +1,6 @@
 <h1 class="text-center mb-4">投稿一覧</h1>
 
-<div class="d-flex justify-content-center">
+<div class="d-flex justify-content-center jscroll">
   <div class="post-container"> <!-- 追加 -->
     <% posts_to_display = @posts.is_a?(Array) ? @posts : @posts.order(created_at: :desc) %>
     <% posts_to_display.each do |post| %>
@@ -23,5 +23,14 @@
   </div>
 </div>
 
-
+<script>
+  $(document).on('turbolinks:load', function() {
+    $('.jscroll').jscroll({ // 追加したdivのclass名と合わせる
+      contentSelector: '.jscroll',
+      nextSelector: '.next a',  // 次ページリンクのセレクタ
+      loadingHtml: '読み込み中',
+      padding: 10
+    });
+  });
+</script>
 
