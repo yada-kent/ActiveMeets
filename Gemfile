@@ -60,3 +60,5 @@ gem 'devise'
 gem 'image_processing'
 
 gem 'font-awesome-sass', '~> 6.4.2'
+
+gem 'kaminari'

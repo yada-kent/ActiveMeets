@@ -2,8 +2,10 @@ class Public::PostsController < ApplicationController
  before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
-    @posts = Post.all
+    @posts = Post.order(created_at: :desc).page(params[:page]).per(10)
+    #一覧にポストを10件表示
   end
+
 
   def show
     @post = Post.find(params[:id])
