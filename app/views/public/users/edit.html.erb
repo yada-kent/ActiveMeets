@@ -1,6 +1,13 @@
 <h1>プロフィール編集</h1>
 
 <%= form_with(model: @user, url: users_path, method: :patch) do |form| %>
+  <% if @user.avatar.attached? %>
+    <%= image_tag @user.avatar, class: 'user-avatar' %>
+  <% end %>
+  <div class="field">
+    <%= form.label :avatar, "Profile Image" %>
+    <%= form.file_field :avatar %>
+  </div>
   <div>
     <%= form.label :name %>
     <%= form.text_field :name %>

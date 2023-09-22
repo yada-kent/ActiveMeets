@@ -3,6 +3,7 @@ class Public::PostsController < ApplicationController
 
   def index
     @posts = Post.order(created_at: :desc).page(params[:page]).per(10)
+    @user = current_user
     #一覧にポストを10件表示
   end
 
@@ -66,7 +67,7 @@ class Public::PostsController < ApplicationController
 
   def tagged
     @tag = Tag.find_by(tag: params[:tag])
-    @posts = @tag.posts if @tag
+    @posts = @tag.posts.order(created_at: :desc) if @tag
   end
 
   private

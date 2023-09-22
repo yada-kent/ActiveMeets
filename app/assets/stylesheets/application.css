@@ -30,8 +30,11 @@
 }
 
 .post-container {
-    max-width: 600px; /* 適切な最大幅を設定 */
+    width: 100%;
+    max-width: 600px;
+    background: linear-gradient(45deg, #f3ec78, #af4261);
 }
+
 
 .card {
     border-radius: 15px; /* カードの角を丸める */
@@ -151,4 +154,18 @@ input[type="submit"]:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.user-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-avatar-small {
+    width: 30px;     /* アイコンの幅を30pxに設定 */
+    height: 30px;    /* アイコンの高さを30pxに設定 */
+    border-radius: 50%; /* アイコンを円形にする */
+    object-fit: cover;  /* 画像のアスペクト比を維持して、指定された領域に収める */
 }

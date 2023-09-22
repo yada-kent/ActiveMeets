@@ -1,22 +1,38 @@
 <h1 class="text-center mb-4">投稿一覧</h1>
 
 <div class="d-flex justify-content-center jscroll">
-  <div class="post-container"> <!-- 追加 -->
+  <div class="post-container">
     <% posts_to_display = @posts.is_a?(Array) ? @posts : @posts.order(created_at: :desc) %>
     <% posts_to_display.each do |post| %>
-      <div class="card mb-4 shadow"> <!-- shadow を追加 -->
-        <% if post.image.attached? %>
-          <div class="card-img-top">
-            <%= image_tag(resize_image(post.image, width: 300, height: 300)) %>
+      <div class="card mb-4 shadow">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <div style="height: 200px; overflow: hidden;">
+              <div class="d-flex align-items-center">
+                <% user_profile_url = user_profile_path(post.user) %>
+                <% if post.user.avatar.attached? %>
+                  <%= link_to image_tag(post.user.avatar, class: 'user-avatar', style: 'width: 50px; height: 50px;'), user_profile_url %>
+                <% else %>
+                  <%= link_to image_tag('default_avatar.png', class: 'user-avatar', style: 'width: 50px; height: 50px;'), user_profile_url %>
+                <% end %>
+                <%= link_to post.user.name, user_profile_url, class: "ml-2" %>
+              </div>
+              <% if post.image.attached? %>
+                <%= image_tag(resize_image(post.image, width: 300, height: 300), style: "object-fit: cover; width: 100%; height: 100%;") %>
+              <% else %>
+                <div style="background-color: #f8f9fa; width: 100%; height: 100%;"></div> <!-- Placeholder for posts without images -->
+              <% end %>
+            </div>
           </div>
-        <% end %>
-        <div class="card-body">
-          <h5 class="card-title"><%= link_to post.title, post_path(post) %></h5>
-          <p class="card-text">by <%= link_to post.user.name, user_profile_path(post.user) %></p>
-          <p><%= post.body.truncate(100) %></p>  <!-- 最初の100字まで本文の内容を表示 -->
-          <% post.tags.each do |tag| %>
-            <%= link_to tag.tag, tag_path(tag.tag), class: "badge badge-primary" %>
-          <% end %>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to post.title, post_path(post) %></h5>
+              <p><%= post.body.truncate(100) %></p>
+              <% post.tags.each do |tag| %>
+                <%= link_to tag.tag, tag_path(tag.tag), class: "badge badge-primary" %>
+              <% end %>
+            </div>
+          </div>
         </div>
       </div>
     <% end %>
@@ -26,12 +42,11 @@
 
 <script>
   $(document).on('turbolinks:load', function() {
-    $('.jscroll').jscroll({ // 追加したdivのclass名と合わせる
+    $('.jscroll').jscroll({
       contentSelector: '.jscroll',
-      nextSelector: '.next a',  // 次ページリンクのセレクタ
+      nextSelector: '.next a',
       loadingHtml: '読み込み中',
       padding: 10
     });
   });
 </script>
-

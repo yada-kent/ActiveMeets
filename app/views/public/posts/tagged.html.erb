@@ -1,16 +1,36 @@
-<h1><%= @tag.tag %>の投稿一覧</h1>
-
-<% @posts.each do |post| %>
-  <div class="list-group-item">
-      <strong><%= link_to post.title, post_path(post) %></strong>
-      by <%= link_to post.user.name, user_profile_path(post.user) %>
-      <div class="mt-2">
-        <%= image_tag(resize_image(post.image, width: 300, height: 300)) if post.image.attached? %>
-      </div>
-      <div>
-        <% post.tags.each do |tag| %>
-          <span class="badge badge-primary"><%= tag.tag %></span>
-        <% end %>
-      </div>
-  </div>
-<% end %>
+<div class="container mt-5">
+  <h1 class="display-4"><%= @tag.tag %>のタグがついた投稿</h1>
+  
+  <% if @posts.empty? %>
+    <p class="lead mt-4">このタグのついた投稿はありません。</p>
+  <% else %>
+    <div class="mt-4">
+      <% @posts.each do |post| %>
+        <div class="card mb-3">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              <div style="height: 200px; overflow: hidden;">
+                <% if post.image.attached? %>
+                  <%= image_tag(resize_image(post.image, width: 300, height: 300), class: "card-img", style: "object-fit: cover; height: 100%;") %>
+                <% else %>
+                  <div style="background-color: #f8f9fa; height: 100%;"></div> <!-- Placeholder for posts without images -->
+                <% end %>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title"><%= link_to post.title, post_path(post) %></h5>
+                <p class="card-text"><small class="text-muted">by <%= link_to post.user.name, user_profile_path(post.user) %></small></p>
+                <div class="mt-2">
+                  <% post.tags.each do |tag| %>
+                    <span class="badge badge-primary"><%= tag.tag %></span>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

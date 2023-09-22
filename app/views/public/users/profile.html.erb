@@ -1,5 +1,14 @@
 <div class="my-page-container">
   <h1><%= @user.name %> のプロフィール</h1>
+
+  <div class="user-profile-image">
+    <% if @user.avatar.attached? %>
+      <%= image_tag @user.avatar, class: 'user-avatar' %>
+    <% else %>
+      <%= image_tag 'default_avatar.png', class: 'user-avatar' %> <!-- この部分はデフォルトのアイコンへのパスを指定してください -->
+    <% end %>
+  </div>
+
   <div class="user-info">
     <p><strong>名前:</strong> <%= @user.name %></p>
     <p><strong>プロフィール:</strong> <%= @user.introduction %></p>

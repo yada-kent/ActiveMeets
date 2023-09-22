@@ -2,6 +2,13 @@
 
 <ul>
   <% @followees.each do |followee| %>
-    <li><%= link_to followee.name, user_profile_path(followee) %></li>
+    <li>
+      <% if followee.avatar.attached? %>
+        <%= link_to image_tag(followee.avatar, class: 'user-avatar-small'), user_profile_path(followee) %>
+      <% else %>
+        <%= link_to image_tag('default_avatar.png', class: 'user-avatar-small'), user_profile_path(followee) %> <!-- この部分はデフォルトのアイコンへのパスを指定してください -->
+      <% end %>
+      <%= link_to followee.name, user_profile_path(followee) %>
+    </li>
   <% end %>
 </ul>
