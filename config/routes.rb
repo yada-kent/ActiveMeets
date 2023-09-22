@@ -41,6 +41,8 @@ end
       resources :likes, only: [:create, :destroy]
     end
 
+    resources :comments, only: [:edit, :update, :destroy]
+
   end
 
   get 'users/:id/profile', to: 'public/users#profile', as: 'user_profile'

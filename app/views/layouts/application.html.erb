@@ -16,10 +16,6 @@
 
 <body>
 
-<% if notice %>
-    <p class="notice"><%= notice %></p>
-<% end %>
-
 <% flash.each do |message_type, message| %>
   <div class="alert alert-<%= message_type %>"><%= message %></div>
 <% end %>

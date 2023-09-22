@@ -1,0 +1,11 @@
+<div class="container mt-4">
+  <h2>コメントの編集</h2>
+
+  <%= form_with(model: @comment, local: true) do |form| %>
+    <div class="form-group">
+      <%= form.label :content, "コメント" %>
+      <%= form.text_area :content, class: "form-control" %>
+    </div>
+    <%= form.submit "更新する", class: "btn btn-primary" %>
+  <% end %>
+</div>
