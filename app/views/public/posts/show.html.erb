@@ -47,8 +47,6 @@
     </li>
   <% end %>
 </ul>
-
-
   <% if current_user == @post.user %>
     <div class="mt-4">
       <%= link_to '編集', edit_post_path(@post), class: "btn btn-warning" %> |

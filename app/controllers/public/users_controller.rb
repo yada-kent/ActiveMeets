@@ -4,6 +4,7 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = current_user
+    @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def edit
@@ -39,7 +40,9 @@ class Public::UsersController < ApplicationController
 
   def profile
     @user = User.find(params[:id])
+    @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(10)
   end
+
 
   def followees
     @user = User.find(params[:id])
