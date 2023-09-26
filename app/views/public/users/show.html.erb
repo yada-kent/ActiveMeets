@@ -1,40 +1,38 @@
-<div class="my-page-container">
-  <h1>マイページ</h1>
-
-  <% if user_signed_in? %>
-    <div class="user-info">
+<div class="my-page-container container mt-5">
+  <div class="row">
+    <div class="col-md-4 text-center">
       <% if current_user.avatar.attached? %>
-        <%= image_tag current_user.avatar, class: 'user-avatar' %>
+        <%= image_tag current_user.avatar, class: 'user-avatar img-fluid rounded-circle' %>
+      <% else %>
+        <%= image_tag 'default_avatar.png', class: 'user-avatar img-fluid rounded-circle' %> 
       <% end %>
-      <p><strong>名前:</strong> <%= current_user.name %></p>
+
+      <% unless current_user == @user %>
+        <% if !current_user.followings.include?(@user) %>
+          <%= link_to 'フォロー', follows_path(user_id: @user.id), method: :post, class: "btn btn-primary mt-3" %>
+        <% else %>
+          <%= link_to 'フォロー解除', users_follow_path(@user), method: :delete, class: "btn btn-danger mt-3" %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="col-md-8">
+      <h1><%= current_user.name %> のマイページ</h1>
       <p><strong>メールアドレス:</strong> <%= current_user.email %></p>
       <p><strong>プロフィール:</strong> <%= current_user.introduction %></p>
-    </div>
 
-    <% unless current_user == @user %>
-      <div class="follow-actions">
-        <% if !current_user.followings.include?(@user) %>
-          <%= link_to 'フォロー', follows_path(user_id: @user.id), method: :post, class: "btn btn-primary" %>
-        <% else %>
-          <%= link_to 'フォロー解除', users_follow_path(@user), method: :delete, class: "btn btn-danger" %>
-        <% end %>
+      <div class="follow-stats mt-3">
+        <p>
+          <%= link_to "#{current_user.followees.count} フォロー中", user_followees_path(current_user) %>
+          <br>
+          <%= link_to "#{current_user.followers.count} フォロワー", user_followers_path(current_user) %>
+        </p>
       </div>
-    <% end %>
-  <% end %>
 
-  <div class="follow-stats">
-    <p>
-      <%= link_to "#{@user.followees.count} フォロー中", user_followees_path(@user) %>
-    </p>
-    <p>
-      <%= link_to "#{@user.followers.count} フォロワー", user_followers_path(@user) %>
-    </p>
-  </div>
-
-  <% if user_signed_in? %>
-    <div class="user-actions">
-      <%= link_to "プロフィール編集", edit_users_path, class: "btn btn-secondary" %>
-      <%= link_to "いいね一覧", likes_users_path, class: "btn btn-info" %>
+      <div class="user-actions mt-3">
+        <%= link_to "プロフィール編集", edit_users_path, class: "btn btn-secondary" %>
+        <%= link_to "いいね一覧", likes_users_path, class: "btn btn-info" %>
+      </div>
     </div>
-  <% end %>
+  </div>
 </div>

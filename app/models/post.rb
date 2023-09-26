@@ -6,5 +6,8 @@ class Post < ApplicationRecord
   has_many :likers, through: :likes, source: :user
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
+  
+  validates :title, presence: true
+  validates :body, presence: true
 
 end

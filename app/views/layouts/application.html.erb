@@ -93,12 +93,15 @@
 
 <%= yield %>
 
-<!-- 固定の新しい投稿ボタン -->
-<div class="fixed-post-button">
-    <%= link_to new_post_path, class: "btn btn-primary btn-lg" do %>
-        <i class="fas fa-pen"></i>
-    <% end %>
-</div>
+<% unless request.path == new_post_path %>
+  <!-- 固定の新しい投稿ボタン -->
+  <div class="fixed-post-button">
+      <%= link_to new_post_path, class: "btn btn-primary btn-lg" do %>
+          <i class="fas fa-pen"></i>
+      <% end %>
+  </div>
+<% end %>
+
 
 </body>
 </html>

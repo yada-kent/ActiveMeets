@@ -36,7 +36,9 @@
         </div>
       </div>
     <% end %>
-    <%= paginate @posts %>
+    <% if @posts.respond_to?(:total_pages) %>
+      <%= paginate @posts %>
+    <% end %>
   </div>
 </div>
 
