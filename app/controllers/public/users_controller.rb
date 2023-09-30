@@ -35,7 +35,8 @@ class Public::UsersController < ApplicationController
 
   def likes
     @user = current_user
-    @liked_posts = @user.liked_posts
+    @liked_posts = current_user.liked_posts.order(created_at: :desc).page(params[:page]).per(10)
+
   end
 
   def profile

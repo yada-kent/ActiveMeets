@@ -6,7 +6,7 @@
       <% if followee.avatar.attached? %>
         <%= link_to image_tag(followee.avatar, class: 'user-avatar-small'), user_profile_path(followee) %>
       <% else %>
-        <%= link_to image_tag('default_avatar.png', class: 'user-avatar-small'), user_profile_path(followee) %> <!-- この部分はデフォルトのアイコンへのパスを指定してください -->
+        <%= link_to image_tag('default_avatar.png', class: 'user-avatar-small'), user_profile_path(followee) %> 
       <% end %>
       <%= link_to followee.name, user_profile_path(followee) %>
     </li>

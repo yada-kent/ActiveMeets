@@ -1,15 +1,28 @@
-<h1><%= @user.name %>のいいね一覧</h1>
+<div class="d-flex justify-content-center mb-5">
+  <h1>いいねした投稿一覧</h1>
+</div>
 
-<ul>
-  <% @liked_posts.each do |post| %>
-    <li>
-      <strong>タイトル:</strong> <%= link_to post.title, post_path(post) %>
-      <p><strong>内容:</strong> <%= post.body %></p> <!-- 例: 投稿の本文を表示 -->
-      <% if post.image.attached? %>
-        <%= image_tag(resize_image(post.image, width: 300, height: 300)) %> <!-- 投稿に画像が添付されていれば、サイズを調整して表示 -->
-      <% end %>
-      <p><strong>投稿者:</strong> <%= post.user.name %></p>
-      <!-- 他に表示したい投稿の詳細情報があればここに追加 -->
-    </li>
-  <% end %>
-</ul>
+<div class="d-flex justify-content-center jscroll">
+  <div class="post-container">
+    <% posts_to_display = @liked_posts.is_a?(Array) ? @liked_posts : @liked_posts.order(created_at: :desc) %>
+    <% posts_to_display.each do |post| %>
+      <%= render 'public/posts/post', post: post %>
+    <% end %>
+
+    <% if @liked_posts.respond_to?(:total_pages) %>
+      <%= paginate @liked_posts %>
+    <% end %>
+  </div>
+</div>
+
+
+<script>
+  $(document).on('turbolinks:load', function() {
+    $('.jscroll').jscroll({
+      contentSelector: '.jscroll',
+      nextSelector: '.next a',
+      loadingHtml: '読み込み中',
+      padding: 10
+    });
+  });
+</script>

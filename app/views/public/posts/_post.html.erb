@@ -1,0 +1,41 @@
+<div class="card mb-4 shadow">
+    <div class="row no-gutters">
+        <div class="col-md-4">
+            <div style="height: 200px; overflow: hidden;">
+                <div class="d-flex align-items-center">
+                    <% user_profile_url = user_profile_path(post.user) %>
+                    <% if post.user.avatar.attached? %>
+                        <%= link_to image_tag(post.user.avatar, class: 'user-avatar', style: 'width: 50px; height: 50px;'), user_profile_url %>
+                    <% else %>
+                        <%= link_to image_tag('default_avatar.png', class: 'user-avatar', style: 'width: 50px; height: 50px;'), user_profile_url %>
+                    <% end %>
+                    <%= link_to post.user.name, user_profile_url, class: "ml-2" %>
+                </div>
+                <% if post.image.attached? %>
+                    <%= image_tag(resize_image(post.image, width: 300, height: 300), style: "object-fit: cover; width: 100%; height: 100%;") %>
+                <% else %>
+                    <div style="background-color: #f8f9fa; width: 100%; height: 100%;"></div> <!-- Placeholder for posts without images -->
+                <% end %>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title"><%= link_to post.title, post_path(post) %></h5>
+                <p><%= post.body.truncate(100) %></p>
+                <% post.tags.each do |tag| %>
+                    <%= link_to tag.tag, tag_path(tag.tag), class: "badge badge-primary" %>
+                <% end %>
+                <!-- いいねボタンの追加 -->
+                <% if current_user.likes.find_by(post_id: post.id) %>
+                    <%= button_to post_like_path(post, post.likes.find_by(user: current_user)), method: :delete, class: "btn btn-link p-0" do %>
+                        <i class="fas fa-heart text-danger"></i>
+                    <% end %>
+                <% else %>
+                    <%= button_to post_likes_path(post_id: post.id), method: :post, class: "btn btn-link p-0" do %>
+                        <i class="far fa-heart text-secondary"></i>
+                    <% end %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
