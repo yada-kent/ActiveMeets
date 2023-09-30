@@ -25,7 +25,6 @@
     <div class="container">
         <a class="navbar-brand" href="<%= root_path %>">Activemeets</a>
 
-        <!-- ... 以前のnavbarの内容 ... -->
 
         <ul class="navbar-nav mx-auto">
           <li class="nav-item">
@@ -44,7 +43,6 @@
             <%= form.submit "検索" %>
           <% end %>
           </li>
-          <!-- ... 中央のメニュー項目 ... -->
         </ul>
 
         <% if user_signed_in? %>
@@ -55,7 +53,6 @@
               <li>
                 <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
               </li>
-              <!-- ... 右側のメニュー項目 ... -->
             </ul>
         <% elsif admin_signed_in? %>
             <ul class="navbar-nav">
@@ -68,7 +65,6 @@
               <li class="nav-item">
                 <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link" %>
               </li>
-              <!-- ... 右側のメニュー項目 ... -->
             </ul>
         <% else %>
             <ul class="navbar-nav">
@@ -81,7 +77,6 @@
               <li class="nav-item">
                 <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "nav-link" %>
               </li>
-              <!-- ... 右側のメニュー項目 ... -->
             </ul>
         <% end %>
     </div>

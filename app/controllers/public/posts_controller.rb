@@ -1,6 +1,6 @@
 class Public::PostsController < ApplicationController
  before_action :set_post, only: [:show, :edit, :update, :destroy]
- before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+ before_action :authenticate_user!, only: [:new, :create, :edit, :update, :index, :search]
 
   def index
     @posts = Post.order(created_at: :desc).page(params[:page]).per(10)
@@ -33,11 +33,11 @@ class Public::PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-  
+
     # 既存のタグの関連付けを更新
     @post.tag_ids = params[:post][:tag_ids]
-  
-  
+
+
     # その他の投稿の属性を更新
     if @post.update(post_params)
       redirect_to @post, notice: '投稿が更新されました。'
@@ -84,7 +84,7 @@ class Public::PostsController < ApplicationController
   def set_post
     @post = Post.find(params[:id])
   end
-  
+
   def post_params
     params.require(:post).permit(:title, :body, :image, tag_ids: [])
   end
