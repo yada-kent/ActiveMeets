@@ -1,0 +1,37 @@
+<div class="container mt-4">
+  <h1 class="display-4"><%= @post.title %></h1>
+  <p class="lead">投稿者: <%= @post.user.name %></p>
+  <p><%= @post.body %></p>
+
+  <!-- 画像表示 -->
+  <%= image_tag(resize_image(@post.image, width: 300, height: 300)) if @post.image.attached? %>
+
+  <!-- タグの表示 -->
+  <div class="mt-4">
+    <% @post.tags.each do |tag| %>
+      <%= link_to tag.tag, tag_path(tag.tag), class: "badge badge-primary" %>
+    <% end %>
+  </div>
+
+  <!-- コメント表示 -->
+  <h2 class="mt-4">コメント</h2>
+
+  <ul class="mt-4 list-unstyled">
+    <% @post.comments.each do |comment| %>
+      <li class="mb-2">
+        <strong><%= comment.user&.name || "匿名" %>:</strong>
+        <%= comment.content %>
+
+        <!-- 管理者向けのコメント削除ボタン -->
+        <% if current_user && current_user.admin? %>
+          <%= link_to '削除', admin_comment_path(comment), method: :delete, data: { confirm: 'コメントを削除しますか？' }, class: "btn btn-sm btn-danger ml-2" %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+
+  <div class="mt-4">
+    <%= link_to '削除', admin_post_path(@post), method: :delete, data: { confirm: '削除しますか？' }, class: "btn btn-danger" %> |
+    <%= link_to '一覧へ戻る', admin_users_path, class: "btn btn-secondary" %>
+  </div>
+</div>

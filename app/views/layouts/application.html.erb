@@ -16,6 +16,10 @@
 
 <body>
 
+<% if admin_signed_in? %>
+    <div class="alert alert-info text-center">管理者としてログイン中</div>
+<% end %>
+
 <% flash.each do |message_type, message| %>
   <div class="alert alert-<%= message_type %>"><%= message %></div>
 <% end %>
@@ -88,7 +92,7 @@
 
 <%= yield %>
 
-<% unless request.path == new_post_path %>
+<% if user_signed_in? && request.path != new_post_path %>
   <!-- 固定の新しい投稿ボタン -->
   <div class="fixed-post-button">
       <%= link_to new_post_path, class: "btn btn-primary btn-lg" do %>
@@ -96,6 +100,7 @@
       <% end %>
   </div>
 <% end %>
+
 
 
 </body>

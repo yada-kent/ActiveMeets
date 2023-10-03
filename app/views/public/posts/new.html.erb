@@ -8,42 +8,47 @@
   </div>
 <% end %>
 
-<h1 class="text-center mb-4">新しい投稿</h1>
+<div class="row justify-content-center">
+  <div class="col-md-6" style="max-width: 500px;">
+    <h1 class="text-center mb-4">新しい投稿</h1>
 
-<div class="d-flex justify-content-center">
-  <div class="post-form-container w-75"> <!-- w-75で幅を制限します -->
     <%= form_with(model: @post, local: true, html: { class: 'needs-validation', novalidate: true }) do |form| %>
+      
+      <!-- タイトルのフィールド -->
       <div class="form-group">
         <%= form.label :title, 'タイトル' %>
         <%= form.text_field :title, class: 'form-control', required: true %>
         <div class="invalid-feedback">タイトルを入力してください。</div>
       </div>
 
+      <!-- 内容のフィールド -->
       <div class="form-group">
         <%= form.label :body, '内容' %>
         <%= form.text_area :body, class: 'form-control', required: true %>
         <div class="invalid-feedback">内容を入力してください。</div>
       </div>
 
+      <!-- 画像のフィールド -->
       <div class="form-group">
         <%= form.label :image, '画像' %>
         <%= form.file_field :image, class: 'form-control-file' %>
       </div>
 
+      <!-- タグのフィールド -->
       <div class="form-group">
-        <label>タグ</label>
-        <div class='form-group'>
-          <%= form.collection_check_boxes(:tag_ids, Tag.all, :id, :tag) do |tag| %>
-            <div class='form-check'>
-              <%= tag.label class: 'form-check-label' do %>
-                <%= tag.check_box class: 'form-check-input' %>
-                <%= tag.text %>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
+        <%= form.label :tag_ids, 'タグ' %>
+        <%= form.collection_check_boxes(:tag_ids, Tag.all, :id, :tag) do |tag| %>
+          <div class='form-check'>
+            <%= tag.label class: 'form-check-label' do %>
+              <%= tag.check_box class: 'form-check-input' %>
+              <%= tag.text %>
+            <% end %>
+          </div>
+        <% end %>
       </div>
-      <div class="actions">
+
+      <!-- 投稿ボタン -->
+      <div class="actions mt-3">
         <%= form.submit '投稿', class: 'btn btn-primary' %>
       </div>
     <% end %>

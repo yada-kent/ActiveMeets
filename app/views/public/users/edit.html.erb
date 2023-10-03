@@ -1,27 +1,42 @@
-<h1>プロフィール編集</h1>
+<div class="row justify-content-center">
+  <div class="col-md-6" style="max-width: 500px;">
+    <h1 class="text-center mb-4">プロフィール編集</h1>
 
-<%= form_with(model: @user, url: users_path, method: :patch) do |form| %>
-  <% if @user.avatar.attached? %>
-    <%= image_tag @user.avatar, class: 'user-avatar' %>
-  <% end %>
-  <div class="field">
-    <%= form.label :avatar, "Profile Image" %>
-    <%= form.file_field :avatar %>
+    <%= form_with(model: @user, url: users_path, method: :patch, html: { class: 'needs-validation', novalidate: true }) do |form| %>
+
+      <% if @user.avatar.attached? %>
+        <div class="text-center mb-3">
+          <%= image_tag @user.avatar, class: 'user-avatar img-thumbnail' %>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= form.label :avatar, "Profile Image" %>
+        <%= form.file_field :avatar, class: 'form-control-file' %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :name, '名前' %>
+        <%= form.text_field :name, class: 'form-control', required: true %>
+        <div class="invalid-feedback">名前を入力してください。</div>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :email, 'メールアドレス' %>
+        <%= form.email_field :email, class: 'form-control', required: true %>
+        <div class="invalid-feedback">メールアドレスを入力してください。</div>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :introduction, '自己紹介' %>
+        <%= form.text_field :introduction, class: 'form-control' %>
+      </div>
+
+      <div class="form-group mt-3">
+        <%= form.submit '編集内容を保存', class: "btn btn-success" %>
+        <%= link_to "退会する", confirm_delete_users_path, method: :get, class: "btn btn-danger ms-3" %>
+      </div>
+
+    <% end %>
   </div>
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-  <div>
-    <%= form.label :email %>
-    <%= form.email_field :email %>
-  </div>
-  <div>
-    <%= form.label :introduction %>
-    <%= form.text_field :introduction %>
-  </div>
-  <div class="form-group">
-    <%= form.submit '編集内容を保存', class: "btn btn-success" %>
-    <%= link_to "退会する", confirm_delete_users_path, method: :get, class: "btn btn-danger ms-3" %>
-  </div>
-<% end %>
+</div>

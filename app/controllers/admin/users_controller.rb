@@ -6,7 +6,7 @@ class Admin::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts #このユーザーの投稿を取得
+    @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def edit
@@ -23,11 +23,11 @@ class Admin::UsersController < ApplicationController
   end
 
   def unsubscribe
-    @user = User.find(params[:id])  # ここを変更
+    @user = User.find(params[:id])
     @user.update(is_deleted: true, original_name: @user.name, name: "退会済みユーザー")
     # 退会する際、元の名前をoriginal_nameカラムに保存する
     flash[:notice] = "退会処理を実行しました"
-    redirect_to admin_users_path  # 適切なリダイレクト先を設定
+    redirect_to admin_users_path
   end
 
 
@@ -40,7 +40,7 @@ class Admin::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :introduction, :is_deleted) # ここに許可したいパラメータを追加
+    params.require(:user).permit(:name, :email, :introduction, :is_deleted, :avatar)
   end
 
 

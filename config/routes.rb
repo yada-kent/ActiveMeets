@@ -11,7 +11,8 @@ Rails.application.routes.draw do
       patch :rejoin
     end
   end
-  resources :posts, only: [:destroy]
+  resources :posts, only: [:destroy, :show, :edit, :update]
+  resources :comments, only: [:destroy]
 end
 
 namespace :admin_namespace do

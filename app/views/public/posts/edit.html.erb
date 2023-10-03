@@ -1,26 +1,42 @@
-<h1>投稿の編集</h1>
-<%= form_with(model: @post, local: true) do |form| %>
-  <div>
-    <%= form.label :title, 'タイトル' %>
-    <%= form.text_field :title %>
-  </div>
-  <div>
-    <%= form.label :body, '内容' %>
-    <%= form.text_area :body %>
-  </div>
-  <div>
-    <%= form.label :image %>
-    <%= form.file_field :image %>
-  </div>
-  <div>
-    <strong>タグ</strong><br>
-    <% Tag.all.each do |tag| %>
-      <%= check_box_tag 'post[tag_ids][]', tag.id, @post.tags.include?(tag) %>
-      <%= tag.tag %>
+<div class="row justify-content-center">
+  <div class="col-md-6" style="max-width: 500px;">
+    <h1>投稿の編集</h1>
+
+    <%= form_with(model: @post, local: true) do |form| %>
+
+      <!-- タイトルのフィールド -->
+      <div class="form-group">
+        <%= form.label :title, 'タイトル' %>
+        <%= form.text_field :title, class: 'form-control' %>
+      </div>
+
+      <!-- 内容のフィールド -->
+      <div class="form-group">
+        <%= form.label :body, '内容' %>
+        <%= form.text_area :body, class: 'form-control' %>
+      </div>
+
+      <!-- 画像のフィールド -->
+      <div class="form-group">
+        <%= form.label :image %>
+        <%= form.file_field :image, class: 'form-control-file' %>
+      </div>
+
+      <!-- タグのフィールド -->
+      <div class="form-group">
+        <strong>タグ</strong><br>
+        <% Tag.all.each do |tag| %>
+          <div class="form-check">
+            <%= check_box_tag 'post[tag_ids][]', tag.id, @post.tags.include?(tag), class: 'form-check-input' %>
+            <%= label_tag "post_tag_ids_#{tag.id}", tag.tag, class: 'form-check-label' %>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- 更新ボタン -->
+      <div class="actions mt-3">
+        <%= form.submit '更新', class: 'btn btn-primary' %>
+      </div>
     <% end %>
   </div>
-
-  <div>
-    <%= form.submit '更新' %>
-  </div>
-<% end %>
+</div>
