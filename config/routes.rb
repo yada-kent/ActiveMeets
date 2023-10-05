@@ -52,9 +52,10 @@ end
     registrations: 'public/registrations',
     sessions: 'public/sessions'
   }
-
+  
+  #ゲストログインした際の処理
   devise_scope :user do
-    post '/users/guest_sign_in', to: 'users/sessions#new_guest' #ゲストログインした際の処理
+    post '/users/guest_sign_in', to: 'users/sessions#new_guest' 
   end
 
   resources :tags, only: [:index, :create]
