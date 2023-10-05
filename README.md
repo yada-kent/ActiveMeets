@@ -1,24 +1,50 @@
-# README
+# ActiveMeets
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
 
-Things you may want to cover:
 
-* Ruby version
+### サイトテーマ
 
-* System dependencies
+トレーニングの内容を共有できるSNSサイト
 
-* Configuration
+### テーマを選んだ理由
 
-* Database creation
+新型ウイルスの影響により健康志向が世界中で高まり、トレーニングへの需要が急速に増えています。
 
-* Database initialization
+しかし、トレーニングは時に孤独で挫折しやすいものです。個別に努力する中で、モチベーションを維持するのは容易ではありません。
 
-* How to run the test suite
+そのため、私はこのSNSサイトを立ち上げることを決意しました。このサイトは、孤立しがちなトレーニーたちが互いのトレーニング内容を共有し、肉体美を披露することでモチベーションを高める場を提供します。
 
-* Services (job queues, cache servers, search engines, etc.)
+みんなで切磋琢磨し、楽しくトレーニングを続けることができるコミュニティを築くことを目指しています。健康と美しさを追求する仲間と共に、心地よい挑戦と成長を重ねていく場所として、このSNSサイトを展開していきたいと思います。
 
-* Deployment instructions
+### ターゲットユーザ
 
-* ...
+- コロナの影響で在宅勤務、オンライン講義が増え、運動不足になった会社員、学生
+- フィットネスやボディビルダーを目指す筋トレ愛好家の男性あるいは女性
+- 体力や健康維持のためにトレーニングを取り入れている中高年の健康志向者
+
+### 主な利用シーン
+
+- トレーニングの記録や成果を投稿・共有したい時
+- 他のユーザーのトレーニング内容やモチベーションを参考にしたい時
+- トレーニング仲間を見つけたり、交流・コミュニケーションを図りたい時
+
+
+## 設計書
+
+
+後ほど作成予定
+
+
+- 実装機能リスト
+- https://docs.google.com/spreadsheets/d/1J23yHNNx9ABtdOgQluJ4xf7VvHjbEE8uvInoiCnWLBc/edit?usp=sharing
+
+## 開発環境
+
+
+- OS：Linux
+- 言語：HTML,CSS,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
+-
