@@ -26,11 +26,19 @@ class Public::UsersController < ApplicationController
 
   def unsubscribe
     @user = current_user
+
+    if @user.email == 'guest@example.com'
+      # ゲストユーザーの場合、退会できない旨を伝えるメッセージを設定し、どこかのページにリダイレクトする
+      flash[:alert] = "ゲストユーザーは退会処理を実行できません。"
+      redirect_to root_path # または適切なパスにリダイレクト
+    else
+
     @user.update(is_deleted: true, original_name: current_user.name, name: "退会済みユーザー")
     #退会する際、元の名前をoriginal_nameカラムに保存する
     reset_session
     flash[:notice] = "退会処理を実行しました"
     redirect_to root_path
+    end
   end
 
   def likes
