@@ -34,7 +34,7 @@
 
 
 - 実装機能リスト
-- https://docs.google.com/spreadsheets/d/1J23yHNNx9ABtdOgQluJ4xf7VvHjbEE8uvInoiCnWLBc/edit?usp=sharing
+  https://docs.google.com/spreadsheets/d/1J23yHNNx9ABtdOgQluJ4xf7VvHjbEE8uvInoiCnWLBc/edit?usp=sharing
 
 ## 開発環境
 
